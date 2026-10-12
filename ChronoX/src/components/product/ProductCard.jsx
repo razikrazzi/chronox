@@ -1,0 +1,243 @@
+import { useState } from "react";
+import { Heart, ShoppingBag, Check } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useRequireAuth } from "../../hooks/useRequireAuth";
+import { toggleWishlist } from "../../redux/slices/wishlistSlice";
+import { addToCart } from "../../redux/slices/cartSlice";
+
+function ProductCard({ product }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { requireAuth } = useRequireAuth();
+  const [justAdded, setJustAdded] = useState(false);
+
+  // Check if current product is saved in wishlist
+  const isLiked = useSelector((state) =>
+    state.wishlist?.items?.some(
+      (item) => String(item.id) === String(product.id),
+    ),
+  );
+
+  const handleWishlistClick = (e) => {
+    e.stopPropagation();
+    requireAuth(() => {
+      dispatch(toggleWishlist(product));
+    });
+  };
+
+  const handleAddToCartClick = (e) => {
+    e.stopPropagation();
+    requireAuth(() => {
+      dispatch(addToCart(product));
+      setJustAdded(true);
+      setTimeout(() => setJustAdded(false), 1400);
+    });
+  };
+
+  return (
+    <div
+      onClick={() => {
+        navigate(`/product/${product.id}`);
+        requestAnimationFrame(() => {
+          window.scrollTo(0, 0);
+        });
+      }}
+      className="
+        group
+        relative
+        flex
+        h-[380px]
+        w-full
+        cursor-pointer
+        flex-col
+        overflow-hidden
+        rounded-[28px]
+        border
+        border-white/10
+        bg-gradient-to-br
+        from-[#29201f]
+        via-[#171313]
+        to-[#080808]
+        transition-all
+        duration-500
+        hover:-translate-y-1
+        hover:border-white/20
+      "
+    >
+      {/* Background Glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -left-20
+          -top-20
+          h-48
+          w-48
+          rounded-full
+          bg-[#d88955]/10
+          blur-3xl
+        "
+      />
+
+      {/* Limited Badge */}
+      <div
+        className="
+          absolute
+          left-5
+          top-5
+          z-20
+          rounded-full
+          border
+          border-white/10
+          bg-white/10
+          px-3
+          py-1.5
+          text-[9px]
+          uppercase
+          tracking-wide
+          text-white/60
+          backdrop-blur-md
+        "
+      >
+        Limited to{" "}
+        <span className="text-white">
+          {product.limited || 50} Pieces
+        </span>
+      </div>
+
+      {/* Wishlist Button */}
+      <button
+        type="button"
+        onClick={handleWishlistClick}
+        aria-label={isLiked ? "Remove from wishlist" : "Add to wishlist"}
+        className={`
+          absolute
+          right-5
+          top-5
+          z-20
+          flex
+          h-9
+          w-9
+          items-center
+          justify-center
+          rounded-full
+          border
+          border-white/10
+          bg-black/40
+          backdrop-blur-md
+          transition
+          hover:bg-white/15
+          hover:text-white
+          ${isLiked ? "text-white" : "text-white/60"}
+        `}
+      >
+        <Heart
+          size={16}
+          strokeWidth={1.5}
+          fill={isLiked ? "currentColor" : "none"}
+        />
+      </button>
+
+      {/* Product Image */}
+      {/* Product Image */}
+<div className="relative flex h-240px w-full items-center justify-center overflow-hidden pt-8">
+  <img
+    src={product.image}
+    alt={product.name}
+    className="
+      h-250px
+      w-250px
+      object-contain
+      transition-transform
+      duration-700
+      group-hover:scale-105
+    "
+  />
+</div>
+
+      {/* Product Information */}
+      <div className="relative z-10 mt-auto px-6 pb-6">
+        {/* Model */}
+        <p
+          className="
+            text-[9px]
+            uppercase
+            tracking-[0.18em]
+            text-white/40
+          "
+        >
+          {product.model}
+        </p>
+
+        {/* Product Name */}
+        <h3
+          className="
+            mt-1
+            text-[13px]
+            font-medium
+            uppercase
+            tracking-wide
+            text-white
+          "
+        >
+          {product.name}
+        </h3>
+
+        {/* Price + Add */}
+        <div className="mt-4 flex items-center justify-between">
+          {/* Price */}
+          <p
+            className="
+              text-[17px]
+              font-medium
+              tracking-wide
+              text-[#e09a68]
+            "
+          >
+            ₹{Number(product.price).toLocaleString("en-IN")}
+          </p>
+
+          {/* Add Button */}
+          <button
+            type="button"
+            onClick={handleAddToCartClick}
+            className={`
+              flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              px-4
+              py-2
+              text-[9px]
+              font-medium
+              uppercase
+              tracking-wide
+              transition-all
+              ${
+                justAdded
+                  ? "border-white bg-white text-black"
+                  : "border-white/15 bg-white/5 text-white hover:border-white/30 hover:bg-white/10"
+              }
+            `}
+          >
+            {justAdded ? (
+              <>
+                <Check size={12} strokeWidth={2} />
+                ADDED
+              </>
+            ) : (
+              <>
+                <ShoppingBag size={12} strokeWidth={1.5} />
+                ADD
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProductCard;
