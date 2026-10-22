@@ -19,24 +19,20 @@ import {
   increaseQuantity,
   decreaseQuantity,
   clearCart,
+  selectCartItems,
+  selectCartSubtotal,
+  selectCartTotal,
+  selectCartCount,
 } from "../redux/slices/cartSlice";
 
 function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart?.items || []);
-
-  // Calculate dynamic subtotal
-  const subtotal = useMemo(() => {
-    return cartItems.reduce((acc, item) => {
-      const price = Number(item.price) || 0;
-      const qty = Number(item.quantity) || 1;
-      return acc + price * qty;
-    }, 0);
-  }, [cartItems]);
-
-  const total = subtotal;
+  const cartItems = useSelector(selectCartItems);
+  const subtotal = useSelector(selectCartSubtotal);
+  const total = useSelector(selectCartTotal);
+  const cartCount = useSelector(selectCartCount);
 
   const formatPrice = (val) => `₹${Number(val).toLocaleString("en-IN")}`;
 
@@ -96,7 +92,7 @@ function Cart() {
                 SHOPPING CART
               </h1>
               <span className="rounded-full border border-black/15 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-black">
-                {cartItems.reduce((acc, i) => acc + (Number(i.quantity) || 1), 0)} Items
+                {cartCount} {cartCount === 1 ? "Item" : "Items"}
               </span>
             </div>
             <p className="mt-2 text-xs font-medium uppercase tracking-[0.16em] text-black/50">

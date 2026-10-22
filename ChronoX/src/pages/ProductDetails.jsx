@@ -9,37 +9,29 @@ import {
   Truck,
   Check,
 } from "lucide-react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import { useAuth } from "../context/AuthContext";
 import { useRequireAuth } from "../hooks/useRequireAuth";
 import { fetchProducts } from "../redux/slices/productSlice";
-import { toggleWishlist } from "../redux/slices/wishlistSlice";
+import {
+  addWishlistItem,
+  removeWishlistItem,
+} from "../redux/slices/wishlistSlice";
 import { addToCart } from "../redux/slices/cartSlice";
 
 function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
-  const { isLoggedIn } = useAuth();
   const { requireAuth } = useRequireAuth();
 
   const [justAdded, setJustAdded] = useState(false);
   const [shareSuccess, setShareSuccess] = useState(false);
 
-  const requireLogin = (action) => {
-    if (!isLoggedIn) {
-      navigate("/login", { state: { from: location.pathname } });
-      return;
-    }
-    action();
-  };
-
-  const { products, loading, error } = useSelector(
+  const { products, loading, error, status } = useSelector(
     (state) => state.products,
   );
 
@@ -49,8 +41,17 @@ function ProductDetails() {
 
   const handleToggleWishlist = () => {
     if (!product) return;
+
     requireAuth(() => {
-      dispatch(toggleWishlist(product));
+      const action = isLiked
+        ? removeWishlistItem(product.id)
+        : addWishlistItem(product);
+
+      dispatch(action)
+        .unwrap()
+        .catch((error) => {
+          console.error("Failed to update wishlist:", error);
+        });
     });
   };
 
@@ -101,10 +102,10 @@ function ProductDetails() {
   ===================================================== */
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (status === "idle") {
       dispatch(fetchProducts());
     }
-  }, [dispatch, products.length]);
+  }, [dispatch, status]);
 
   /* =====================================================
      CURRENT PRODUCT
@@ -398,7 +399,7 @@ function ProductDetails() {
             </p>
 
             <p className="mt-7 text-sm font-medium tracking-wide text-white/80">
-              ₹{price.toLocaleString("en-IN")}
+              ₹{Number(product.price || 0).toLocaleString("en-IN")}
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">

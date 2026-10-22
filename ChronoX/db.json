@@ -82,19 +82,19 @@
       "collection": "Tourbillon",
       "description": "A bold tourbillon timepiece featuring an orange leather strap and an intricate blue mechanical movement.",
       "image": "/src/assets/images/watch-4.png",
-      "stock": 2,
+      "stock": 6,
       "rating": 4.9,
       "reviews": 64,
       "material": "Titanium",
-      "size": 45,
-      "limited": 15,
+      "size": "45",
+      "limited": true,
       "features": [
         "Tourbillon Movement",
         "Sapphire Crystal",
         "Leather Strap",
         "Swiss Made"
       ],
-      "availability": true
+      "availability": "In Stock"
     },
     {
       "id": "5",
@@ -130,19 +130,19 @@
       "collection": "Tourbillon",
       "description": "An elegant black tourbillon featuring a minimalist case and sophisticated mechanical movement.",
       "image": "/src/assets/images/watch-6.png",
-      "stock": 0,
+      "stock": 10,
       "rating": 4.6,
       "reviews": 43,
       "material": "Black Titanium",
-      "size": 44,
-      "limited": 15,
+      "size": "44",
+      "limited": true,
       "features": [
         "Tourbillon Movement",
         "Black Titanium Case",
         "Sapphire Crystal",
         "Swiss Made"
       ],
-      "availability": false
+      "availability": "In Stock"
     },
     {
       "id": "7",
@@ -295,14 +295,16 @@
       "name": "Arjun Menon",
       "email": "arjun@gmail.com",
       "password": "arjun123",
-      "role": "user"
+      "role": "user",
+      "blocked": false
     },
     {
       "id": "2",
       "name": "Rahul Kumar",
       "email": "rahul@gmail.com",
       "password": "rahul123",
-      "role": "user"
+      "role": "user",
+      "blocked": false
     },
     {
       "id": "3",
@@ -318,6 +320,39 @@
       "role": "user",
       "createdAt": "2026-10-10T09:13:23.151Z",
       "id": "M9Bd6T4bCyA"
+    },
+    {
+      "name": "Hisana Ismail",
+      "email": "hisanaismail55@gmail.com",
+      "password": "hiya123",
+      "role": "user",
+      "createdAt": "2026-10-14T05:24:24.360Z",
+      "id": "JF3vuNUZQrI"
+    },
+    {
+      "name": "text",
+      "email": "text@gmail.com",
+      "password": "text1234",
+      "role": "user",
+      "createdAt": "2026-10-14T06:40:34.347Z",
+      "id": "_QRDjjn4-QY"
+    },
+    {
+      "name": "anas",
+      "email": "anas@gmail.com",
+      "password": "anas123",
+      "role": "user",
+      "id": "k-VX1KxL9h4",
+      "blocked": false
+    },
+    {
+      "name": "newuser",
+      "email": "newuser@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "createdAt": "2026-10-19T10:52:48.345Z",
+      "id": "QYB0KBYb40Q",
+      "blocked": false
     }
   ],
   "orders": [
@@ -341,7 +376,7 @@
         "state": "Kerala",
         "pincode": "682016"
       },
-      "status": "Delivered",
+      "status": "delivered",
       "createdAt": "2026-09-28T10:30:00Z"
     },
     {
@@ -373,6 +408,1718 @@
       },
       "status": "Processing",
       "createdAt": "2026-10-02T14:15:00Z"
+    },
+    {
+      "id": "1X33saBY4Xg",
+      "userId": "JF3vuNUZQrI",
+      "userName": "Hisana Ismail",
+      "customerName": "Hisana Ismail",
+      "email": "hisanaismail55@gmail.com",
+      "date": "2026-10-14T05:40:39.708Z",
+      "createdAt": "2026-10-14T05:40:39.708Z",
+      "items": [
+        {
+          "id": "5",
+          "productId": "5",
+          "name": "Tourbillon Blue",
+          "image": "/src/assets/images/watch-5.png",
+          "collection": "Tourbillon",
+          "model": "CH-9202-BL",
+          "price": 425000,
+          "quantity": 1
+        }
+      ],
+      "total": 425000,
+      "totalAmount": 425000,
+      "shipping": {
+        "fullName": "Hisana Ismail",
+        "email": "hisanaismail55@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "card",
+      "status": "cancelled"
+    },
+    {
+      "id": "WnowXrN53mU",
+      "userId": "JF3vuNUZQrI",
+      "userName": "Hisana Ismail",
+      "customerName": "Hisana Ismail",
+      "email": "hisanaismail55@gmail.com",
+      "date": "2026-10-14T06:32:25.754Z",
+      "createdAt": "2026-10-14T06:32:25.755Z",
+      "items": [
+        {
+          "id": "7",
+          "productId": "7",
+          "name": "Chrono Eclipse",
+          "image": "/src/assets/images/watch-7.png",
+          "collection": "Chronograph",
+          "model": "CH-8101-BK",
+          "price": 185000,
+          "quantity": 1
+        }
+      ],
+      "total": 185000,
+      "totalAmount": 185000,
+      "shipping": {
+        "fullName": "Hisana Ismail",
+        "email": "hisanaismail55@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "d-_bz7tDtGA",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T06:40:56.666Z",
+      "createdAt": "2026-10-14T06:40:56.666Z",
+      "items": [
+        {
+          "id": "6",
+          "productId": "6",
+          "name": "Tourbillon Black",
+          "image": "/src/assets/images/watch-6.png",
+          "collection": "Tourbillon",
+          "model": "CH-9203-BK",
+          "price": 410000,
+          "quantity": 1
+        }
+      ],
+      "total": 410000,
+      "totalAmount": 410000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "cod",
+      "status": "Confirmed"
+    },
+    {
+      "id": "a0l3-27tNT8",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T07:14:05.777Z",
+      "createdAt": "2026-10-14T07:14:05.777Z",
+      "items": [
+        {
+          "id": "3",
+          "productId": "3",
+          "name": "Space Timer Jupiter",
+          "image": "/src/assets/images/watch-3.png",
+          "collection": "Space Timer",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "quantity": 1
+        }
+      ],
+      "total": 295000,
+      "totalAmount": 295000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "yyHvK1jJDmk",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T07:14:57.061Z",
+      "createdAt": "2026-10-14T07:14:57.061Z",
+      "items": [
+        {
+          "id": "7",
+          "productId": "7",
+          "name": "Chrono Eclipse",
+          "image": "/src/assets/images/watch-7.png",
+          "collection": "Chronograph",
+          "model": "CH-8101-BK",
+          "price": 185000,
+          "quantity": 1
+        }
+      ],
+      "total": 185000,
+      "totalAmount": 185000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "card",
+      "status": "shipped"
+    },
+    {
+      "id": "6yWn4uiPvSU",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T07:24:41.037Z",
+      "createdAt": "2026-10-14T07:24:41.037Z",
+      "items": [
+        {
+          "id": "3",
+          "productId": "3",
+          "name": "Space Timer Jupiter",
+          "image": "/src/assets/images/watch-3.png",
+          "collection": "Space Timer",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "quantity": 1
+        }
+      ],
+      "total": 295000,
+      "totalAmount": 295000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "card",
+      "status": "delivered"
+    },
+    {
+      "id": "hDT2F_eBvUk",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T07:25:22.812Z",
+      "createdAt": "2026-10-14T07:25:22.812Z",
+      "items": [
+        {
+          "id": "8",
+          "productId": "8",
+          "name": "Classic Silver",
+          "image": "/src/assets/images/watch-8.png",
+          "collection": "Classic",
+          "model": "CH-7101-SL",
+          "price": 125000,
+          "quantity": 1
+        }
+      ],
+      "total": 125000,
+      "totalAmount": 125000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9198333333"
+      },
+      "paymentMethod": "upi",
+      "status": "cancelled"
+    },
+    {
+      "id": "-mhrZs6vkt4",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T07:36:02.341Z",
+      "createdAt": "2026-10-14T07:36:02.341Z",
+      "items": [
+        {
+          "id": "3",
+          "productId": "3",
+          "name": "Space Timer Jupiter",
+          "image": "/src/assets/images/watch-3.png",
+          "collection": "Space Timer",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "quantity": 1
+        }
+      ],
+      "total": 295000,
+      "totalAmount": 295000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "netbanking",
+      "status": "shipped"
+    },
+    {
+      "id": "Q5SwZGWaA7w",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T10:26:05.329Z",
+      "createdAt": "2026-10-14T10:26:05.330Z",
+      "items": [
+        {
+          "id": "3",
+          "productId": "3",
+          "name": "Space Timer Jupiter",
+          "image": "/src/assets/images/watch-3.png",
+          "collection": "Space Timer",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "quantity": 1
+        }
+      ],
+      "total": 295000,
+      "totalAmount": 295000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "DsCpgWQlwWo",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-14T10:26:56.724Z",
+      "createdAt": "2026-10-14T10:26:56.724Z",
+      "items": [
+        {
+          "id": "12",
+          "productId": "12",
+          "name": "Royal Gold Classic",
+          "image": "/src/assets/images/watch-12.png",
+          "collection": "Royal",
+          "model": "CH-7205-GD",
+          "price": 175000,
+          "quantity": 1
+        }
+      ],
+      "total": 175000,
+      "totalAmount": 175000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "S4h0-bkC8nc",
+      "userId": "k-VX1KxL9h4",
+      "userName": "anas",
+      "customerName": "anas",
+      "email": "anas@gmail.com",
+      "date": "2026-10-16T04:12:38.631Z",
+      "createdAt": "2026-10-16T04:12:38.631Z",
+      "items": [
+        {
+          "id": "11",
+          "productId": "11",
+          "name": "Ocean Sport",
+          "image": "/src/assets/images/watch-11.png",
+          "collection": "Ocean",
+          "model": "CH-8204-BL",
+          "price": 98000,
+          "quantity": 1
+        }
+      ],
+      "total": 98000,
+      "totalAmount": 98000,
+      "shipping": {
+        "fullName": "anas",
+        "email": "anas@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "sdu3UHg8Unc",
+      "userId": "3",
+      "userName": "Alexander Wright",
+      "customerName": "Alexander Wright",
+      "email": "alexander@chronox.luxury",
+      "date": "2026-10-19T05:10:47.080Z",
+      "createdAt": "2026-10-19T05:10:47.080Z",
+      "items": [
+        {
+          "id": "1",
+          "productId": "1",
+          "name": "Space Timer Black Hole",
+          "image": "/src/assets/images/watch-1.png",
+          "collection": "Space Timer",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 285000,
+      "discountAmount": 42750,
+      "couponCode": "SPACETIMER15",
+      "couponId": "OFFER-01",
+      "couponTitle": "Space Timer Inaugural Privilege",
+      "total": 242250,
+      "totalAmount": 242250,
+      "shipping": {
+        "fullName": "Alexander Wright",
+        "email": "alexander@chronox.luxury",
+        "address": "742 Evergreen Terrace",
+        "city": "Mumbai",
+        "postalCode": "400001",
+        "phone": "+91 98765 43210"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "2FF231fquYM",
+      "userId": "3",
+      "userName": "Admin",
+      "customerName": "Admin",
+      "email": "admin@chronox.com",
+      "date": "2026-10-19T05:32:34.921Z",
+      "createdAt": "2026-10-19T05:32:34.921Z",
+      "items": [
+        {
+          "id": "1",
+          "productId": "1",
+          "name": "Space Timer Black Hole",
+          "image": "/src/assets/images/watch-1.png",
+          "collection": "Space Timer",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 285000,
+      "discountAmount": 42750,
+      "couponCode": "SPACETIMER15",
+      "couponId": "OFFER-01",
+      "couponTitle": "Space Timer Inaugural Privilege",
+      "total": 242250,
+      "totalAmount": 242250,
+      "shipping": {
+        "fullName": "Admin",
+        "email": "admin@chronox.com",
+        "address": "123 Quantum Way",
+        "city": "Bangalore",
+        "postalCode": "560001",
+        "phone": "9876543210"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "0dezBOnovQ4",
+      "userId": "M9Bd6T4bCyA",
+      "userName": "manu",
+      "customerName": "manu",
+      "email": "manu@gmail.com",
+      "date": "2026-10-19T06:20:48.143Z",
+      "createdAt": "2026-10-19T06:20:48.144Z",
+      "items": [
+        {
+          "id": "2",
+          "productId": "2",
+          "name": "Space Timer Jupiter Gold",
+          "image": "/src/assets/images/watch-2.png",
+          "collection": "Space Timer",
+          "model": "CH-9341.2-CUBK",
+          "price": 320000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 320000,
+      "discountAmount": 48000,
+      "couponCode": "SPACETIMER15",
+      "couponId": "OFFER-01",
+      "couponTitle": "Space Timer Inaugural Privilege",
+      "total": 272000,
+      "totalAmount": 272000,
+      "shipping": {
+        "fullName": "manu",
+        "email": "manu@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+9199898999"
+      },
+      "paymentMethod": "card",
+      "status": "Shipped",
+      "statusUpdatedAt": "2026-10-19T06:21:45.540Z",
+      "updatedAt": "2026-10-19T06:21:45.540Z"
+    },
+    {
+      "id": "465PPX1re90",
+      "userId": "M9Bd6T4bCyA",
+      "userName": "manu",
+      "customerName": "manu",
+      "email": "manu@gmail.com",
+      "date": "2026-10-19T06:47:45.039Z",
+      "createdAt": "2026-10-19T06:47:45.039Z",
+      "items": [
+        {
+          "id": "10",
+          "productId": "10",
+          "name": "Aurora Lady",
+          "image": "/src/assets/images/watch-10.png",
+          "collection": "Aurora",
+          "model": "CH-6101-RG",
+          "price": 155000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 155000,
+      "discountAmount": 23250,
+      "couponCode": "SUMMM346",
+      "couponId": "VtCjQ6Avolg",
+      "couponTitle": "summerevent",
+      "total": 131750,
+      "totalAmount": 131750,
+      "shipping": {
+        "fullName": "manu",
+        "email": "manu@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "DJUzOyQ95o8",
+      "userId": "_QRDjjn4-QY",
+      "userName": "text",
+      "customerName": "text",
+      "email": "text@gmail.com",
+      "date": "2026-10-19T08:49:07.362Z",
+      "createdAt": "2026-10-19T08:49:07.362Z",
+      "items": [
+        {
+          "id": "4",
+          "productId": "4",
+          "name": "Tourbillon Orange",
+          "image": "/src/assets/images/watch-4.png",
+          "collection": "Tourbillon",
+          "model": "CH-9201-OR",
+          "price": 450000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 450000,
+      "discountAmount": 0,
+      "couponCode": null,
+      "couponId": null,
+      "couponTitle": null,
+      "total": 450000,
+      "totalAmount": 450000,
+      "shipping": {
+        "fullName": "text",
+        "email": "text@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "nFJje698odI",
+      "userId": "QYB0KBYb40Q",
+      "userName": "newuser",
+      "customerName": "newuser",
+      "email": "newuser@gmail.com",
+      "date": "2026-10-19T10:53:12.565Z",
+      "createdAt": "2026-10-19T10:53:12.565Z",
+      "items": [
+        {
+          "id": "1",
+          "productId": "1",
+          "name": "Space Timer Black Hole",
+          "image": "/src/assets/images/watch-1.png",
+          "collection": "Space Timer",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 285000,
+      "discountAmount": 42750,
+      "couponCode": "SPACETIMER15",
+      "couponId": "OFFER-01",
+      "couponTitle": "Space Timer Inaugural Privilege",
+      "total": 242250,
+      "totalAmount": 242250,
+      "shipping": {
+        "fullName": "newuser",
+        "email": "newuser@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Shipped",
+      "statusUpdatedAt": "2026-10-19T10:53:55.508Z",
+      "updatedAt": "2026-10-19T10:53:55.508Z"
+    },
+    {
+      "id": "CEYhY5A-S4M",
+      "userId": "QYB0KBYb40Q",
+      "userName": "newuser",
+      "customerName": "newuser",
+      "email": "newuser@gmail.com",
+      "date": "2026-10-19T10:56:40.559Z",
+      "createdAt": "2026-10-19T10:56:40.559Z",
+      "items": [
+        {
+          "id": "1",
+          "productId": "1",
+          "name": "Space Timer Black Hole",
+          "image": "/src/assets/images/watch-1.png",
+          "collection": "Space Timer",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 285000,
+      "discountAmount": 0,
+      "couponCode": null,
+      "couponId": null,
+      "couponTitle": null,
+      "total": 285000,
+      "totalAmount": 285000,
+      "shipping": {
+        "fullName": "newuser",
+        "email": "newuser@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    },
+    {
+      "id": "lqT4CKVxtg4",
+      "userId": "QYB0KBYb40Q",
+      "userName": "newuser",
+      "customerName": "newuser",
+      "email": "newuser@gmail.com",
+      "date": "2026-10-20T06:52:42.564Z",
+      "createdAt": "2026-10-20T06:52:42.564Z",
+      "items": [
+        {
+          "id": "2",
+          "productId": "2",
+          "name": "Space Timer Jupiter Gold",
+          "image": "/src/assets/images/watch-2.png",
+          "collection": "Space Timer",
+          "model": "CH-9341.2-CUBK",
+          "price": 320000,
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "productId": "1",
+          "name": "Space Timer Black Hole",
+          "image": "/src/assets/images/watch-1.png",
+          "collection": "Space Timer",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "quantity": 1
+        }
+      ],
+      "originalAmount": 605000,
+      "discountAmount": 0,
+      "couponCode": null,
+      "couponId": null,
+      "couponTitle": null,
+      "total": 605000,
+      "totalAmount": 605000,
+      "shipping": {
+        "fullName": "newuser",
+        "email": "newuser@gmail.com",
+        "address": "arakaparambu",
+        "city": "ernakulam",
+        "postalCode": "684020",
+        "phone": "+918921765835"
+      },
+      "paymentMethod": "card",
+      "status": "Confirmed"
+    }
+  ],
+  "offers": [
+    {
+      "id": "OFFER-01",
+      "title": "Space Timer Inaugural Privilege",
+      "code": "SPACETIMER15",
+      "discount": "15% OFF",
+      "discountType": "percentage",
+      "discountValue": 15,
+      "scope": "Space Timer Collection",
+      "scopeType": "collection",
+      "scopeValue": "Space Timer",
+      "status": "Active",
+      "validTill": "2026-12-31"
+    },
+    {
+      "id": "OFFER-02",
+      "title": "Tourbillon Heritage Collector Bonus",
+      "code": "TOURBILLON10",
+      "discount": "10% OFF",
+      "discountType": "percentage",
+      "discountValue": 10,
+      "scope": "Tourbillon Timepieces",
+      "scopeType": "collection",
+      "scopeValue": "Tourbillon",
+      "status": "Active",
+      "validTill": "2026-11-30"
+    },
+    {
+      "id": "OFFER-03",
+      "title": "Premier Horology Complimentary Vault Service",
+      "code": "VIPCONCIERGE",
+      "discount": "Complimentary Service",
+      "discountType": "service",
+      "discountValue": 0,
+      "scope": "All Orders Above ₹2,00,000",
+      "scopeType": "all",
+      "scopeValue": "all",
+      "minOrderAmount": 200000,
+      "status": "Active",
+      "validTill": "Permanent"
+    },
+    {
+      "id": "VtCjQ6Avolg",
+      "title": "summerevent",
+      "code": "SUMMM346",
+      "discount": "15%",
+      "discountType": "percentage",
+      "discountValue": 15,
+      "scope": "Aurora Collection",
+      "scopeType": "collection",
+      "scopeValue": "Aurora",
+      "minOrderAmount": null,
+      "validTill": "2026-10-20",
+      "status": "Active",
+      "createdAt": "2026-10-19T06:46:32.592Z"
+    },
+    {
+      "id": "eEaNRuWpMmk",
+      "title": "text",
+      "code": "TEX123",
+      "discount": "15%",
+      "discountType": "percentage",
+      "discountValue": 15,
+      "scope": "All watches",
+      "scopeType": "all",
+      "scopeValue": "all",
+      "minOrderAmount": null,
+      "validTill": "2026-10-18",
+      "status": "Active",
+      "createdAt": "2026-10-19T10:54:56.221Z"
+    }
+  ],
+  "offerSettings": [
+    {
+      "id": "6us1VA1uoZY",
+      "enabled": true,
+      "title": "CHRONOX Event Offer",
+      "description": "Limited-time offers on selected timepieces.",
+      "image": "",
+      "eventStart": "",
+      "eventEnd": "",
+      "buttonText": "Explore Offer",
+      "buttonLink": "/dashboard",
+      "updatedAt": "2026-10-19T08:30:53.502Z"
+    }
+  ],
+  "carts": [],
+  "wishlists": [
+    {
+      "userId": "JF3vuNUZQrI",
+      "items": [
+        {
+          "id": "3",
+          "name": "Space Timer Jupiter",
+          "brand": "ChronoX",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A refined Jupiter-inspired chronograph combining modern engineering with traditional Swiss watchmaking.",
+          "image": "/src/assets/images/watch-3.png",
+          "stock": 3,
+          "rating": 4.7,
+          "reviews": 76,
+          "material": "Stainless Steel",
+          "size": 43,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Chronograph",
+            "Sapphire Crystal",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "pwdIhHnSVZ8"
+    },
+    {
+      "userId": "1",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "Enp_OqWoS_A"
+    },
+    {
+      "userId": "_QRDjjn4-QY",
+      "items": [
+        {
+          "id": "2",
+          "name": "Space Timer Jupiter Gold",
+          "brand": "ChronoX",
+          "model": "CH-9341.2-CUBK",
+          "price": 320000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A luxurious gold-toned mechanical watch inspired by the dramatic colours and atmosphere of Jupiter.",
+          "image": "/src/assets/images/watch-2.png",
+          "stock": 5,
+          "rating": 4.8,
+          "reviews": 98,
+          "material": "Red Gold",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Red Gold Case",
+            "Swiss Made"
+          ],
+          "availability": true
+        },
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        },
+        {
+          "id": "3",
+          "name": "Space Timer Jupiter",
+          "brand": "ChronoX",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A refined Jupiter-inspired chronograph combining modern engineering with traditional Swiss watchmaking.",
+          "image": "/src/assets/images/watch-3.png",
+          "stock": 3,
+          "rating": 4.7,
+          "reviews": 76,
+          "material": "Stainless Steel",
+          "size": 43,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Chronograph",
+            "Sapphire Crystal",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "ngXleur-O9Q"
+    },
+    {
+      "userId": "1",
+      "items": [],
+      "id": "3xWiFXJ1KJI"
+    },
+    {
+      "userId": "1",
+      "items": [],
+      "id": "FZrhQIDIM0w"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "8qPct2z2yUQ"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "vxO6fr4ZeaQ"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "UiHvlVEGdCo"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "PMtGA81hjyE"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "-i_ktnzpSig"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "1J2O10WhkjM"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "38u0dC1Y5wQ"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "OTR2dGKkr3g"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "rt2-0j2Yvk0"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "vb8-Gzf735I"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "vv5VHv9iBC0"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "zxEPFcaVG8Q"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "KlbbU3BFqEM"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "Brvzd-sNFcM"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "JjDOa-OtkDw"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "hYQ7Vq17pak"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "H9gYdM5w_Lo"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "rtYnVuHBDVU"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "xpncpz_pLno"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "Q7WFfA_8Fms"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "Kj_jI7T5Wb4"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "4mlQwtF1w0A"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "ttjRwHpbtwA"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "_TbdP0jqUQw"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "GxKhat3PQX8"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "G03mxOnc4jI"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "glNWQyEHE9o"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "bGvNH-Q7tpI"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "8SyHKFoJqsE"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "dhiEfqF-Ry4"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "2zl5V7nOgOs"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "2_koKYk6hjs"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "CPEDhlEefB8"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "8kGGtfEgPR4"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "HioAJEnNWDw"
+    },
+    {
+      "userId": "3",
+      "items": [
+        {
+          "id": "1",
+          "name": "Space Timer Black Hole",
+          "brand": "ChronoX",
+          "model": "CH-9345M.2-GRBK",
+          "price": 285000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A sophisticated black timepiece inspired by the mysteries of deep space, featuring a skeleton dial and precision mechanical movement.",
+          "image": "/src/assets/images/watch-1.png",
+          "stock": 8,
+          "rating": 4.9,
+          "reviews": 124,
+          "material": "Black Steel",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Water Resistant",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "Hc_XWl-FWa4"
+    },
+    {
+      "userId": "M9Bd6T4bCyA",
+      "items": [
+        {
+          "id": "2",
+          "name": "Space Timer Jupiter Gold",
+          "brand": "ChronoX",
+          "model": "CH-9341.2-CUBK",
+          "price": 320000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A luxurious gold-toned mechanical watch inspired by the dramatic colours and atmosphere of Jupiter.",
+          "image": "/src/assets/images/watch-2.png",
+          "stock": 5,
+          "rating": 4.8,
+          "reviews": 98,
+          "material": "Red Gold",
+          "size": 44,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Skeleton Dial",
+            "Red Gold Case",
+            "Swiss Made"
+          ],
+          "availability": true
+        },
+        {
+          "id": "3",
+          "name": "Space Timer Jupiter",
+          "brand": "ChronoX",
+          "model": "CH-9343.2-CUBK",
+          "price": 295000,
+          "category": "Luxury",
+          "collection": "Space Timer",
+          "description": "A refined Jupiter-inspired chronograph combining modern engineering with traditional Swiss watchmaking.",
+          "image": "/src/assets/images/watch-3.png",
+          "stock": 3,
+          "rating": 4.7,
+          "reviews": 76,
+          "material": "Stainless Steel",
+          "size": 43,
+          "limited": 50,
+          "features": [
+            "Automatic Movement",
+            "Chronograph",
+            "Sapphire Crystal",
+            "Swiss Made"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "kWJm4ARZxgg"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "xvLXZJaJJSg"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "2EVyc6wj9gA"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "wLLkpOX6ZUY"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "m4hMzRmkrfU"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "_IZZNQ8aE5g"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "IxMdzpT8a7U"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "lvd4jwaMzPo"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "LYco7-qYkHc"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "q9ncMRWD6Dk"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "JmDbTc5rSVg"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "82XdknURNwY"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "zWVGkIdD8J0"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "A-X6o3M833w"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "qkSJ1OoU7MQ"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "deFlBWNhk3g"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "oxkvEVtMKpk"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "WRfSBkVvJ6k"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "EBBRNUwhfFs"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "jbb2Ga0Cyok"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "FhRH1L49qQU"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "VSvOg7z1qZI"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "uhMFK9ig4Ck"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "VZWjVP-mkFo"
+    },
+    {
+      "userId": "QYB0KBYb40Q",
+      "items": [
+        {
+          "id": "9",
+          "name": "Midnight Skeleton",
+          "brand": "ChronoX",
+          "model": "CH-7302-MB",
+          "price": 210000,
+          "category": "Men",
+          "collection": "Skeleton",
+          "description": "A modern skeleton watch revealing the intricate mechanical movement beneath its midnight black dial.",
+          "image": "/src/assets/images/watch-9.png",
+          "stock": 7,
+          "rating": 4.7,
+          "reviews": 68,
+          "material": "Black Steel",
+          "size": 42,
+          "limited": 75,
+          "features": [
+            "Skeleton Dial",
+            "Automatic Movement",
+            "Sapphire Crystal",
+            "Water Resistant"
+          ],
+          "availability": true
+        }
+      ],
+      "id": "XZ1YyoMe06c"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "TcGN4lujdNs"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "fq6UJWglHqo"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "10g6m8DGgi4"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "H0qD1ym4fgY"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "qA545d_HhBY"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "w3Hf1YvAA4Q"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "XVsze7f7jOk"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "Gay0hOcrZxo"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "sh8RGs-bPl4"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "er_Wxt6bVr8"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "dox6rcUH2GQ"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "0vZiyZrcI6E"
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": "2qzVPdI_Eaw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

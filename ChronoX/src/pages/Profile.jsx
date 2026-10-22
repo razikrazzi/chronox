@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-  User,
   Heart,
   ShoppingBag,
   Package,
@@ -13,17 +12,15 @@ import {
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { useAuth } from "../context/AuthContext";
+import { selectCartCount } from "../redux/slices/cartSlice";
+import { selectWishlistCount } from "../redux/slices/wishlistSlice";
 
 function Profile() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-  const cartCount = useSelector((state) =>
-    (state.cart?.items || []).reduce((acc, i) => acc + (Number(i.quantity) || 1), 0),
-  );
-  const wishlistCount = useSelector(
-    (state) => state.wishlist?.items?.length || 0,
-  );
+  const cartCount = useSelector(selectCartCount);
+  const wishlistCount = useSelector(selectWishlistCount);
 
   const handleLogout = () => {
     logout();

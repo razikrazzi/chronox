@@ -63,7 +63,7 @@ function Login() {
     // Wait until background session verification completes
     if (authLoading) return;
 
-    if (isLoggedIn && !isSubmitting && !hasNavigatedRef.current) {
+    if (isLoggedIn && !isSubmitting && !blocked && !hasNavigatedRef.current) {
       hasNavigatedRef.current = true;
       const target = resolveRedirectDestination(user, location.state?.from);
       navigate(target, { replace: true });

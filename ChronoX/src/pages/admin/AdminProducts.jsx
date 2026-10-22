@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../../redux/slices/productSlice";
 import {
   Search,
   RefreshCw,
   Watch,
   Plus,
+  Pencil,
+  Trash2,
   ArrowLeft,
   Save,
   Image as ImageIcon,
@@ -13,6 +17,25 @@ import {
 } from "lucide-react";
 
 const API_URL = "http://localhost:3000/products";
+
+// Vite resolves files in src/assets/images and supplies the correct URL.
+// This allows paths such as /src/assets/images/watch-6.png to work.
+const localImageModules = import.meta.glob("/src/assets/images/*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+function getProductImageSrc(imagePath) {
+  if (!imagePath) return "";
+  if (imagePath.startsWith("data:") || imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+
+  const cleanPath = imagePath.split("?")[0];
+  const normalizedPath = cleanPath.startsWith("/") ? cleanPath : `/${cleanPath}`;
+  return localImageModules[normalizedPath] || imagePath;
+}
 
 const INITIAL_FORM = {
   name: "",
@@ -48,6 +71,7 @@ const labelClass =
   "mb-2 block text-xs font-medium text-[#aaaaaa]";
 
 function AdminProducts() {
+  const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -57,6 +81,8 @@ function AdminProducts() {
 
   // Controls which view is displayed.
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingProductId, setEditingProductId] = useState(null);
+  const [deletingProductId, setDeletingProductId] = useState(null);
 
   // Form state.
   const [newProduct, setNewProduct] = useState(INITIAL_FORM);
@@ -163,22 +189,98 @@ function AdminProducts() {
     }));
   };
 
-  // Open the inline form.
+  // Allow the admin to choose an image file from their computer.
+  // The image is stored as a data URL in JSON Server, so no upload server is required.
+  const handleImageFileChange = (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setFormError("Please choose a valid image file.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 3 * 1024 * 1024) {
+      setFormError("Please choose an image smaller than 3 MB.");
+      event.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setNewProduct((previous) => ({
+        ...previous,
+        image: String(reader.result || ""),
+      }));
+      setFormError("");
+    };
+    reader.onerror = () => setFormError("Unable to read this image file.");
+    reader.readAsDataURL(file);
+  };
+
+  // Open the form to create a new product.
   const handleOpenForm = () => {
+    setEditingProductId(null);
     setNewProduct({ ...INITIAL_FORM });
     setFormError("");
     setSuccessMessage("");
     setShowAddForm(true);
   };
 
-  // Return to the product list.
+  // Open the same inline form with the selected product's existing data.
+  const handleEditProduct = (product) => {
+    setEditingProductId(product.id);
+    setNewProduct({
+      ...INITIAL_FORM,
+      ...product,
+      price: String(product.price ?? ""),
+      stock: String(product.stock ?? ""),
+      rating: String(product.rating ?? 0),
+      reviews: String(product.reviews ?? 0),
+      limited: Boolean(product.limited),
+      availability: product.availability || "In Stock",
+      features: Array.isArray(product.features)
+        ? product.features.join(", ")
+        : String(product.features || ""),
+    });
+    setFormError("");
+    setSuccessMessage("");
+    setShowAddForm(true);
+  };
+
+  // Return to the product list without saving changes.
   const handleCancelForm = () => {
     if (saving) return;
 
     setShowAddForm(false);
+    setEditingProductId(null);
     setNewProduct({ ...INITIAL_FORM });
     setFormError("");
     setSuccessMessage("");
+  };
+
+  // Delete a product from JSON Server and update the table.
+  const handleDeleteProduct = async (product) => {
+    if (!window.confirm(`Are you sure you want to delete "${product.name || "this product"}"?`)) {
+      return;
+    }
+
+    setDeletingProductId(product.id);
+    setError("");
+    setSuccessMessage("");
+
+    try {
+      await axios.delete(`${API_URL}/${product.id}`);
+      setProducts((current) => current.filter((item) => item.id !== product.id));
+      dispatch(fetchProducts({ force: true }));
+      setSuccessMessage("Product deleted successfully.");
+    } catch (err) {
+      console.error("Delete product error:", err);
+      setError("Unable to delete the product. Check JSON Server and try again.");
+    } finally {
+      setDeletingProductId(null);
+    }
   };
 
   // Save a new product to JSON Server.
@@ -189,15 +291,15 @@ function AdminProducts() {
     setSuccessMessage("");
 
     if (
-      !newProduct.name.trim() ||
-      !newProduct.model.trim() ||
-      !newProduct.category.trim() ||
-      !newProduct.collection.trim() ||
+      !String(newProduct.name ?? "").trim() ||
+      !String(newProduct.model ?? "").trim() ||
+      !String(newProduct.category ?? "").trim() ||
+      !String(newProduct.collection ?? "").trim() ||
       !newProduct.price ||
-      !newProduct.stock
+      newProduct.stock === ""
     ) {
       setFormError(
-        "Please fill in all required fields."
+        "Please fill in all required fields (Name, Model, Category, Collection, Price, and Stock)."
       );
       return;
     }
@@ -219,62 +321,91 @@ function AdminProducts() {
       !Number.isFinite(reviews) ||
       reviews < 0
     ) {
-      setFormError(
-        "Enter a valid price, stock, rating (0–5), and review count."
-      );
+      setFormError("Enter a valid price, stock, rating (0–5), and review count.");
       return;
     }
 
     const productData = {
-      name: newProduct.name.trim(),
-      brand: newProduct.brand.trim() || "CHRONOX",
-      model: newProduct.model.trim(),
+      name: String(newProduct.name ?? "").trim(),
+      brand: String(newProduct.brand ?? "").trim() || "CHRONOX",
+      model: String(newProduct.model ?? "").trim(),
       price,
-      category: newProduct.category.trim(),
-      collection: newProduct.collection.trim(),
-      description: newProduct.description.trim(),
-      image: newProduct.image.trim(),
+      category: String(newProduct.category ?? "").trim(),
+      collection: String(newProduct.collection ?? "").trim(),
+      description: String(newProduct.description ?? "").trim(),
+      image: getProductImageSrc(String(newProduct.image ?? "").trim()),
       stock,
       rating,
       reviews,
-      material: newProduct.material.trim(),
-      size: newProduct.size.trim(),
+      material: String(newProduct.material ?? "").trim(),
+      size: String(newProduct.size ?? "").trim(),
       limited: newProduct.limited,
       availability:
         stock === 0 ? "Out of Stock" : newProduct.availability,
-      features: newProduct.features
-        .split(",")
-        .map((feature) => feature.trim())
-        .filter(Boolean),
+      features: Array.isArray(newProduct.features)
+        ? newProduct.features.map((feature) => String(feature).trim()).filter(Boolean)
+        : String(newProduct.features ?? "")
+            .split(",")
+            .map((feature) => feature.trim())
+            .filter(Boolean),
     };
 
     setSaving(true);
 
+    // Keep the operation type and ID stable throughout the request.
+    const productIdToUpdate = editingProductId;
+    const isUpdating = productIdToUpdate !== null && productIdToUpdate !== undefined;
+
     try {
-      await axios.post(API_URL, productData);
+      let savedProduct;
 
-      // Reload the product list after successful creation.
-      const response = await axios.get(API_URL);
+      if (isUpdating) {
+        // PATCH updates only the submitted fields and preserves other existing fields.
+        const response = await axios.patch(
+          `${API_URL}/${encodeURIComponent(String(productIdToUpdate))}`,
+          productData
+        );
+        savedProduct = response.data;
 
-      setProducts(
-        Array.isArray(response.data) ? response.data : []
-      );
+        // Update the local list immediately using the server response.
+        setProducts((current) =>
+          current.map((product) =>
+            String(product.id) === String(productIdToUpdate)
+              ? { ...product, ...savedProduct }
+              : product
+          )
+        );
+      } else {
+        const response = await axios.post(API_URL, productData);
+        savedProduct = response.data;
+        setProducts((current) => [...current, savedProduct]);
+      }
+
+      // Fetch the latest list so the UI reflects the server's saved data.
+      const listResponse = await axios.get(API_URL);
+      setProducts(Array.isArray(listResponse.data) ? listResponse.data : []);
+      dispatch(fetchProducts({ force: true }));
 
       setSearch("");
       setCategoryFilter("all");
       setNewProduct({ ...INITIAL_FORM });
       setShowAddForm(false);
-      setSuccessMessage("Product added successfully.");
+      setEditingProductId(null);
+      setSuccessMessage(
+        isUpdating
+          ? "Product updated successfully."
+          : "Product added successfully."
+      );
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
-      console.error("Add product error:", err);
+      console.error("Save product error:", err.response?.data || err);
+      const serverMessage = err.response?.data?.message;
 
       setFormError(
-        "Unable to save the product. Check JSON Server and try again."
+        serverMessage
+          ? `Unable to ${isUpdating ? "update" : "save"} product: ${serverMessage}`
+          : `Unable to ${isUpdating ? "update" : "save"} the product. Check that JSON Server is running at ${API_URL} and inspect the browser console for details.`
       );
     } finally {
       setSaving(false);
@@ -303,6 +434,8 @@ function AdminProducts() {
 
               if (!saving) {
                 setShowAddForm(false);
+                setEditingProductId(null);
+                setNewProduct({ ...INITIAL_FORM });
                 setFormError("");
                 setSuccessMessage("");
               }
@@ -315,7 +448,7 @@ function AdminProducts() {
           {showAddForm && (
             <>
               <span className="text-[#444444]">/</span>
-              <span className="text-white">Add Product</span>
+              <span className="text-white">{editingProductId !== null ? "Edit Product" : "Add Product"}</span>
             </>
           )}
         </div>
@@ -335,12 +468,14 @@ function AdminProducts() {
             </div>
 
             <h1 className="text-2xl font-medium tracking-tight text-white">
-              {showAddForm ? "Add New Product" : "Products"}
+              {showAddForm ? (editingProductId !== null ? "Edit Product" : "Add New Product") : "Products"}
             </h1>
 
             <p className="mt-2 text-xs text-[#858585]">
               {showAddForm
-                ? "Add a new timepiece to your product catalogue."
+                ? editingProductId !== null
+                  ? "Update the details of this timepiece."
+                  : "Add a new timepiece to your product catalogue."
                 : "Manage the CHRONOX luxury timepiece catalogue."}
             </p>
           </div>
@@ -570,34 +705,44 @@ function AdminProducts() {
                 </h2>
 
                 <p className="mt-1 text-xs text-[#777777]">
-                  Enter an image URL for the watch.
+                  Choose an image from your computer, enter a web URL, or use a path such as /src/assets/images/watch-6.png.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-[1fr_180px]">
                 <div>
                   <label className={labelClass}>
-                    Image URL
+                    Image URL or local asset path
                   </label>
 
                   <input
-                    type="url"
+                    type="text"
                     name="image"
-                    value={newProduct.image}
+                    value={newProduct.image.startsWith("data:") ? "" : newProduct.image}
                     onChange={handleInputChange}
-                    placeholder="https://example.com/watch.png"
+                    placeholder="/src/assets/images/watch-6.png"
                     className={inputClass}
                   />
 
+                  <label className={`${labelClass} mt-5`}>
+                    Or choose an image from your folder
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageFileChange}
+                    className="block w-full cursor-pointer text-xs text-[#aaaaaa] file:mr-3 file:border-0 file:bg-white file:px-3 file:py-2 file:text-xs file:font-medium file:text-black hover:file:bg-gray-200"
+                  />
+
                   <p className="mt-2 text-[11px] text-[#666666]">
-                    Use a valid URL accessible by your browser.
+                    Supported: PNG, JPG, WEBP, or another browser-supported image. Maximum 3 MB.
                   </p>
                 </div>
 
                 <div className="flex min-h-[160px] items-center justify-center overflow-hidden border border-white/10 bg-[#202020]">
                   {newProduct.image ? (
                     <img
-                      src={newProduct.image}
+                      src={getProductImageSrc(newProduct.image)}
                       alt="Product preview"
                       className="h-full max-h-[200px] w-full object-contain p-3"
                       onError={(event) => {
@@ -799,7 +944,7 @@ function AdminProducts() {
                 ) : (
                   <>
                     <Save size={14} />
-                    Save Product
+                    {editingProductId !== null ? "Update Product" : "Save Product"}
                   </>
                 )}
               </button>
@@ -935,6 +1080,9 @@ function AdminProducts() {
                     <th className="px-4 py-4 text-right text-[10px] font-medium uppercase tracking-wider text-[#999999]">
                       Stock
                     </th>
+                    <th className="px-4 py-4 text-right text-[10px] font-medium uppercase tracking-wider text-[#999999]">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
 
@@ -953,7 +1101,7 @@ function AdminProducts() {
                           <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-white/10 bg-[#252525]">
                             {product.image ? (
                               <img
-                                src={product.image}
+                                src={getProductImageSrc(product.image)}
                                 alt={product.name || "Watch"}
                                 className="h-full w-full object-cover"
                                 onError={(event) => {
@@ -1007,6 +1155,33 @@ function AdminProducts() {
                           {product.stock ?? 0} in stock
                         </span>
                       </td>
+
+                      <td className="px-4 py-4">
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleEditProduct(product)}
+                            disabled={saving || deletingProductId !== null}
+                            aria-label={`Edit ${product.name || "product"}`}
+                            title="Edit product"
+                            className="inline-flex h-8 items-center gap-1.5 border border-white/10 px-2.5 text-xs text-[#dddddd] transition hover:border-white/30 hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            <Pencil size={13} />
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteProduct(product)}
+                            disabled={deletingProductId !== null || saving}
+                            aria-label={`Delete ${product.name || "product"}`}
+                            title="Delete product"
+                            className="inline-flex h-8 items-center gap-1.5 border border-red-500/20 px-2.5 text-xs text-red-400 transition hover:border-red-500/50 hover:bg-red-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            <Trash2 size={13} />
+                            {deletingProductId === product.id ? "Deleting..." : "Delete"}
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   ))}
 
@@ -1015,7 +1190,7 @@ function AdminProducts() {
                     !error && (
                       <tr>
                         <td
-                          colSpan={6}
+                          colSpan={7}
                           className="px-4 py-16 text-center"
                         >
                           <Search
@@ -1037,7 +1212,7 @@ function AdminProducts() {
                   {loading && (
                     <tr>
                       <td
-                        colSpan={6}
+                        colSpan={7}
                         className="px-4 py-16 text-center"
                       >
                         <RefreshCw

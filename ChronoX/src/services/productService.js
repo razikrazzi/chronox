@@ -1,5 +1,5 @@
 import api from "./api";
-import dbData from "../../db.json";
+import fallbackProducts from "../data/fallbackProducts";
 
 export const getProducts = async () => {
   try {
@@ -7,11 +7,11 @@ export const getProducts = async () => {
     if (response.data && Array.isArray(response.data) && response.data.length > 0) {
       return response.data;
     }
-    return dbData.products || [];
+    return fallbackProducts;
   } catch (error) {
-    // If json-server is not running or network request fails, fall back gracefully to db.json
-    console.warn("Backend API not reachable, loaded products from db.json:", error.message);
-    return dbData.products || [];
+    // If json-server is not running or network request fails, fall back gracefully to static products
+    console.warn("Backend API not reachable, loaded products from fallback data:", error.message);
+    return fallbackProducts;
   }
 };
 
@@ -22,9 +22,9 @@ export const getProductById = async (id) => {
       return response.data;
     }
   } catch (error) {
-    console.warn("Backend API not reachable, looking up in db.json:", error.message);
+    console.warn("Backend API not reachable, looking up in fallback data:", error.message);
   }
 
-  const found = (dbData.products || []).find((p) => String(p.id) === String(id));
+  const found = fallbackProducts.find((p) => String(p.id) === String(id));
   return found || null;
 };

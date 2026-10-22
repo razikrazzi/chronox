@@ -11,7 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "../components/layout/Navbar";
 import ProductCard from "../components/product/ProductCard";
-import { fetchProducts } from "../redux/slices/productSlice";
+import {
+  fetchProducts,
+  selectAllProducts,
+  selectProductStatus,
+  selectProductLoading,
+  selectProductError,
+} from "../redux/slices/productSlice";
 
 import spaceTimerVideo from "../assets/video/video1.mp4";
 import Footer from "../components/layout/Footer";
@@ -19,29 +25,47 @@ import Footer from "../components/layout/Footer";
 function Dashboard() {
   const dispatch = useDispatch();
 
-  const { products, loading, error } = useSelector(
-    (state) => state.products,
-  );
+  const products = useSelector(selectAllProducts);
+  const status = useSelector(selectProductStatus);
+  const loading = useSelector(selectProductLoading);
+  const error = useSelector(selectProductError);
 
-const [search, setSearch] = useState("");
-const [price, setPrice] = useState("all");
-const [category, setCategory] = useState("all");
+  const [search, setSearch] = useState("");
+  const [price, setPrice] = useState("all");
+  const [category, setCategory] = useState("all");
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (status === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, status]);
+
+  // Only show the initial blocking loader when products have never been loaded into Redux
+  const isInitialLoading = loading && products.length === 0;
 
   /* -------------------------------------------------------
      COLLECTIONS
   ------------------------------------------------------- */
 
-  const spaceTimerProducts = products.filter(
-    (product) => product.collection === "Space Timer",
-  );
+ const spaceTimerProducts = useMemo(
+  () =>
+    products.filter(
+      (product) =>
+        product.collection === "Space Timer" &&
+        Number(product.stock) > 0
+    ),
+  [products]
+);
 
-  const tourbillonProducts = products.filter(
-    (product) => product.collection === "Tourbillon",
-  );
+const tourbillonProducts = useMemo(
+  () =>
+    products.filter(
+      (product) =>
+        product.collection === "Tourbillon" &&
+        Number(product.stock) > 0
+    ),
+  [products]
+);
 
 
   /* -------------------------------------------------------
@@ -60,8 +84,9 @@ const [category, setCategory] = useState("all");
 const filteredProducts = useMemo(() => {
   const searchValue = search.toLowerCase().trim();
 
-  return products.filter((product) => {
-    const matchesSearch =
+return products.filter((product) => {
+  if (Number(product.stock) <= 0) return false;
+      const matchesSearch =
       product.name?.toLowerCase().includes(searchValue) ||
       product.model?.toLowerCase().includes(searchValue) ||
       product.collection?.toLowerCase().includes(searchValue);
@@ -98,11 +123,15 @@ const hasFilters =
   price !== "all" ||
   category !== "all";
 
-    const shopAllProducts = filteredProducts.filter(
-  (product) =>
-    product.collection !== "Space Timer" &&
-    product.collection !== "Tourbillon"
-);
+  const shopAllProducts = useMemo(
+    () =>
+      filteredProducts.filter(
+        (product) =>
+          product.collection !== "Space Timer" &&
+          product.collection !== "Tourbillon",
+      ),
+    [filteredProducts],
+  );
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -533,7 +562,7 @@ const hasFilters =
 
             {/* PRODUCTS */}
 
-            {loading && (
+            {isInitialLoading && (
 
               <div className="flex min-h-[300px] items-center justify-center">
 
@@ -561,7 +590,7 @@ const hasFilters =
 
             )}
 
-            {!loading && !error && shopAllProducts.length === 0 && (
+            {!isInitialLoading && !error && shopAllProducts.length === 0 && (
 
               <div className="py-32 text-center">
 
@@ -586,7 +615,7 @@ const hasFilters =
 
             )}
 
-           {!loading && !error && shopAllProducts.length > 0 && (
+           {!isInitialLoading && !error && shopAllProducts.length > 0 && (
            <div className="grid grid-cols-1 gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {shopAllProducts.map((product) => (
                <ProductCard

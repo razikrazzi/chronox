@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,23 +12,97 @@ import { fetchProducts } from "../redux/slices/productSlice";
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [offerSettings, setOfferSettings] = useState(null);
 
-  const { products, loading, error } = useSelector(
+  const { products, loading, error, status } = useSelector(
     (state) => state.products,
   );
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (status === "idle") {
       dispatch(fetchProducts());
     }
-  }, [dispatch, products.length]);
+  }, [dispatch, status]);
 
-  const featuredWatches = products.filter(
-    (product) => product.collection === "Space Timer",
+  // Fetch the active storefront banner.
+  // Read the collection directly so an empty offerSettings collection
+  // does not trigger a 404 request to /offerSettings/1.
+  // Polling keeps an already-open homepage in sync with admin changes.
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadOfferSettings = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/offerSettings");
+
+        if (!response.ok) {
+          throw new Error(
+            `Unable to load offer settings (HTTP ${response.status})`,
+          );
+        }
+
+        const settingsList = await response.json();
+
+        const settings = Array.isArray(settingsList)
+          ? settingsList.find((item) => String(item.id) === "1") ??
+            settingsList[0] ??
+            null
+          : null;
+
+        if (!cancelled) {
+          setOfferSettings(settings);
+        }
+      } catch (err) {
+        console.error("Failed to load homepage offer image:", err);
+
+        if (!cancelled) {
+          setOfferSettings(null);
+        }
+      }
+    };
+
+    loadOfferSettings();
+
+    const intervalId = window.setInterval(loadOfferSettings, 5000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
+  const hasActiveOffer = Boolean(
+    offerSettings?.enabled &&
+      offerSettings?.image &&
+      (!offerSettings?.eventStart || new Date(offerSettings.eventStart).getTime() <= Date.now()) &&
+      (!offerSettings?.eventEnd || new Date(offerSettings.eventEnd).getTime() >= Date.now()),
   );
 
-  const tourbillonWatches = products.filter(
-    (product) => product.collection === "Tourbillon",
+  const heroImage = hasActiveOffer ? offerSettings.image : heroWatch;
+  const heroTitle = hasActiveOffer && offerSettings.title
+    ? offerSettings.title
+    : "Open Gear Tourbillon";
+  const heroDescription = hasActiveOffer && offerSettings.description
+    ? offerSettings.description
+    : "A new expression of mechanical precision. Engineered with character, designed to be seen.";
+  const heroEyebrow = hasActiveOffer ? "Limited-Time Offer · CHRONOX" : "New Release · 2026";
+  const heroButtonText = hasActiveOffer && offerSettings.buttonText
+    ? offerSettings.buttonText
+    : "Discover";
+  const heroButtonLink = hasActiveOffer
+    ? (offerSettings.productId
+        ? `/product/${offerSettings.productId}`
+        : offerSettings.buttonLink || "/dashboard")
+    : "/dashboard";
+
+  const featuredWatches = useMemo(
+    () => products.filter((product) => product.collection === "Space Timer"),
+    [products],
+  );
+
+  const tourbillonWatches = useMemo(
+    () => products.filter((product) => product.collection === "Tourbillon"),
+    [products],
   );
 
   return (
@@ -38,7 +112,7 @@ function Home() {
           NAVBAR
       ===================================================== */}
 
-      <header className="relative z-50 border-b border-black/10 bg-white">
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur-md">
         <Navbar />
       </header>
 
@@ -55,8 +129,8 @@ function Home() {
           <div className="absolute inset-0">
 
            <img
-  src={heroWatch}
-  alt="Open Gear Flying Tourbillon Paraiba"
+  src={heroImage}
+  alt={offerSettings?.enabled && offerSettings?.image ? offerSettings?.title || "CHRONOX offer" : "Open Gear Flying Tourbillon Paraiba"}
   className="
     absolute
     right-0
@@ -89,48 +163,25 @@ function Home() {
             <div className="max-w-480px">
 
               <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45">
-                New Release · 2026
+                {heroEyebrow}
               </p>
 
-              <h1 className="text-6xl font-black uppercase leading-[0.82] tracking-[-0.06em] sm:text-7xl md:text-8xl lg:text-[100px]">
-                Open
-                <br />
-                Gear
-                <br />
-                Tourbillon
+              <h1 className="max-w-[850px] whitespace-pre-line text-5xl font-black uppercase leading-[0.86] tracking-[-0.06em] sm:text-6xl md:text-7xl lg:text-[84px]">
+                {heroTitle}
               </h1>
 
               <p className="mt-7 max-w-sm text-sm leading-6 text-black/55">
-                A new expression of mechanical precision. Engineered with
-                character, designed to be seen.
+                {heroDescription}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-
-              
-
                 <button
                   type="button"
-                  onClick={() => navigate("/dashboard")}
-                  className="
-                    rounded-full
-                    border
-                    border-black
-                    px-7
-                    py-4
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.08em]
-                    text-black
-                    transition
-                    hover:bg-black
-                    hover:text-white
-                  "
+                  onClick={() => navigate(heroButtonLink)}
+                  className="rounded-full border border-black px-7 py-4 text-[10px] font-bold uppercase tracking-[0.08em] text-black transition hover:bg-black hover:text-white"
                 >
-                  Discover
+                  {heroButtonText}
                 </button>
-
               </div>
 
             </div>
@@ -141,13 +192,13 @@ function Home() {
 
           <div className="absolute bottom-6 left-6 right-6 flex justify-between text-[8px] font-semibold uppercase tracking-[0.18em] text-black/35 md:left-10 md:right-10 lg:left-16 lg:right-16">
 
-            <span>CH-3123-PABL</span>
+            <span>{hasActiveOffer ? "CHRONOX · OFFER" : "CH-3123-PABL"}</span>
 
             <span className="hidden md:block">
-              Open Gear Flying Tourbillon
+              {hasActiveOffer ? heroTitle : "Open Gear Flying Tourbillon"}
             </span>
 
-            <span>01 / 04</span>
+            <span>{hasActiveOffer ? "LIMITED OFFER" : "01 / 04"}</span>
 
           </div>
 

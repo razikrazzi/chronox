@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 
 import { useAuth } from "../../context/AuthContext";
+import { selectCartCount } from "../../redux/slices/cartSlice";
+import { selectWishlistCount } from "../../redux/slices/wishlistSlice";
 
 const navLinks = [
   {
@@ -34,17 +36,10 @@ function Navbar({ dark = false }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Redux Cart count (total quantity)
-  const cartCount = useSelector((state) =>
-    (state.cart?.items || []).reduce(
-      (acc, item) => acc + (Number(item.quantity) || 1),
-      0,
-    ),
-  );
+  const cartCount = useSelector(selectCartCount);
 
   // Redux Wishlist count
-  const wishlistCount = useSelector(
-    (state) => state.wishlist?.items?.length || 0,
-  );
+  const wishlistCount = useSelector(selectWishlistCount);
 
   const textColor = dark ? "text-white" : "text-black";
   const mutedColor = dark ? "text-white/80" : "text-black/80";
